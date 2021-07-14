@@ -6,10 +6,10 @@ import asyncio
 
 load_dotenv()
 
-GlitchyToken = os.getenv("GLITCHY_DISCORD_TOKEN")
-GlitchyPrefix = os.getenv("GLITCHY_PREFIX")
+GLITCHY_TOKEN = os.getenv("GLITCHY_DISCORD_TOKEN")
+GLITCHY_PREFIX = os.getenv("GLITCHY_PREFIX")
 
-client = commands.Bot(command_prefix=GlitchyPrefix + " ")
+client = commands.Bot(command_prefix=GLITCHY_PREFIX + " ")
 
 for filename in os.listdir("./glitchy"):
     if filename.endswith(".py"):
@@ -54,4 +54,4 @@ async def reload(ctx, extension):
 # async def ping(ctx):
 #     await ctx.send('Testing...MOONIKAAAA LOL')
 
-client.run(GlitchyToken)
+client.run(GLITCHY_TOKEN)

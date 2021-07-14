@@ -9,26 +9,27 @@ from discord.ext.commands.errors import CheckAnyFailure
 import asyncio
 from cogwatch import watch
 
-class Events(commands.Cog):
 
+class Events(commands.Cog):
     def __init__(self, client):
         self.client = client
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print('Connecting...')
+        print("Connecting...")
         await asyncio.sleep(2)
-        print('Hacking into Glitchified Code... :)')
+        print("Hacking into Glitchified Code... :)")
         await asyncio.sleep(2)
-        print('Connected to API...Moonikaa Speaking, lol. :)')
+        print("Connected to API...Moonikaa Speaking, lol. :)")
 
     @commands.Cog.listener()
     async def on_disconnect(self):
-        print('Disconnecting...')
+        print("Disconnecting...")
         await asyncio.sleep(2)
-        print('Unhacking into Glitchified Code... :(')
+        print("Unhacking into Glitchified Code... :(")
         await asyncio.sleep(2)
-        print('Disconnected to API...Moonikaa Leaving, oof. :(')
+        print("Disconnected to API...Moonikaa Leaving, oof. :(")
+
 
 def setup(client):
     client.add_cog(Events(client))

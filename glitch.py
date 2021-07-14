@@ -6,33 +6,37 @@ import asyncio
 
 load_dotenv()
 
-GlitchyToken = os.getenv("GLITCHY_DISCORD_TOKEN")
-GlitchyPrefix = os.getenv("GLITCHY_PREFIX")
+GLITCHY_TOKEN = os.getenv("GLITCHY_DISCORD_TOKEN")
+GLITCHY_PREFIX = os.getenv("GLITCHY_PREFIX")
 
-client = commands.Bot(command_prefix=GlitchyPrefix + " ")
+client = commands.Bot(command_prefix=GLITCHY_PREFIX + " ")
 
-for filename in os.listdir('./glitchy'):
-    if filename.endswith('.py'):
-        client.load_extension(f'glitchy.{filename[:-3]}')
+for filename in os.listdir("./glitchy"):
+    if filename.endswith(".py"):
+        client.load_extension(f"glitchy.{filename[:-3]}")
+
 
 @client.command()
 @commands.is_owner()
 async def load(ctx, extension):
-    client.load_extension(f'glitchy.{extension}')
-    await ctx.send(f'{extension} has been glitchified. :)')
+    client.load_extension(f"glitchy.{extension}")
+    await ctx.send(f"{extension} has been glitchified. :)")
+
 
 @client.command()
 @commands.is_owner()
 async def unload(ctx, extension):
-    client.unload_extension(f'glitchy.{extension}')
-    await ctx.send(f'{extension} has been unglitchified. :)')
+    client.unload_extension(f"glitchy.{extension}")
+    await ctx.send(f"{extension} has been unglitchified. :)")
+
 
 @client.command()
 @commands.is_owner()
 async def reload(ctx, extension):
-    client.unload_extension(f'glitchy.{extension}')
-    client.load_extension(f'glitchy.{extension}')
-    await ctx.send(f'{extension} has been reglitchified. :)')
+    client.unload_extension(f"glitchy.{extension}")
+    client.load_extension(f"glitchy.{extension}")
+    await ctx.send(f"{extension} has been reglitchified. :)")
+
 
 ## Testing Events
 
@@ -50,4 +54,4 @@ async def reload(ctx, extension):
 # async def ping(ctx):
 #     await ctx.send('Testing...MOONIKAAAA LOL')
 
-client.run(GlitchyToken)
+client.run(GLITCHY_TOKEN)

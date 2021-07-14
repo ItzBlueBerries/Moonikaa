@@ -14,34 +14,17 @@ class Log(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.author == self.client.user:
+        if message.author.bot:
             return
 
-        empty = []
-        channel = self.client.get_channel(864286535700709376)
+        creator_dm_channel = self.client.get_channel(864286535700709376)
+        cloned_message = await creator_dm_channel.send(f"__***~~{message.author} (`{message.author.id}`)~~:***__\n```{message.content}```" + "\n" + "\n".join([a.url for a in message.attachments]))
 
-        creator_dm = self.client.get_channel(864286535700709376)
+        def reply_check(m):
+            return m.reference.message_id == cloned_message.id
 
-        if str(message.channel.type) == "private":
-            if message.attachments != empty:
-                filee = message.attachments[-1]
-                await message.author.send("You're DM was successfully sent to the creators, thank you! :)")
-                await creator_dm.send(f"__***~~ {message.author} ({message.author.id}) ~~ Sent:***__")
-
-                for file in filee:
-                    await creator_dm.send(f"{filee.url}")
-            # creator_dm = discord.utils.get(self.client.get_all_channels(), guild__name='Fruitsy Bot Testing Server', name='dms-for-the-creator')
-            else:
-                await message.author.send("You're DM was successfully sent to the creators, thank you! :)")
-                await creator_dm.send(f"__***~~ {message.author} ({message.author.id}) ~~ Sent:***__\n```{message.content}```")
-        # elif str(message.channel) == channel and message.content.startsWith("<"):
-        #     member_obj = message.mentions[0]
-
-        #     index = message.content.index(" ")
-        #     string = message.content()
-        #     dm_message = string[index:]
-
-        #     await member_obj.send(f'__***~~ {message.author} ({message.author.id}) ~~ Sent Back:***__\n```{dm_message}```')
+        reply = await self.bot.wait_for("message", check=reply_check)
+        await message.reply(reply.content + "\n" + "\n".join([a.url for a in reply.attachments]))
 
 
 def setup(client):

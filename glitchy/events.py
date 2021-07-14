@@ -7,7 +7,11 @@ from discord.embeds import Embed
 from discord.ext import commands
 from discord.ext.commands.errors import CheckAnyFailure
 import asyncio
-from cogwatch import watch
+from cogwatch import Watcher
+
+async def start_watcher(client):
+    watcher = Watcher(client, path="glitchy")
+    await watcher.start()
 
 
 class Events(commands.Cog):
@@ -16,6 +20,8 @@ class Events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
+        asyncio.create_task(start_watcher(self.client))
+        
         print("Connecting...")
         await asyncio.sleep(2)
         print("Hacking into Glitchified Code... :)")

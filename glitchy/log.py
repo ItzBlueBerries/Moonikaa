@@ -7,6 +7,7 @@ from discord import message
 from discord.colour import Color
 from discord.embeds import Embed
 from discord.ext import commands
+from discord.ext.commands import errors
 from discord.ext.commands.errors import CheckAnyFailure
 
 
@@ -41,6 +42,20 @@ class Log(commands.Cog):
 
         reply = await self.client.wait_for("message", check=reply_check)
         await message.reply(reply.content, files=await fetch_attachments(reply.attachments))
+
+    @commands.Cog.listener()
+    async def on_member_join(self, member):
+        for chan in member.guild.channels:
+            if str(chan) == "welcome-goodbyes-log":
+                embed = discord.Embed(title='Welcome Message', description=f'{member} has joined the {member.guild.name}.')
+                await chan.send(embed=embed)
+            
+    @commands.Cog.listener()
+    async def on_member_leave(self, member):
+        for chan in member.guild.channels:
+            if str(chan) == "welcome-goodbyes-log":
+                embed = discord.Embed(title='Goodbye Message', description=f'{member} has left {member.guild.name}.')
+                await chan.send(embed=embed)
 
 
 def setup(client):

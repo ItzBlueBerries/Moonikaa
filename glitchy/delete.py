@@ -13,7 +13,8 @@ class Delete(commands.Cog):
         self.client = client
 
     @commands.command()
-    async def placeholder(self):
+    async def placeholder(self, ctx):
+        await ctx.send('ez')
         return
 
 def setup(client):

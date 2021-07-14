@@ -9,8 +9,10 @@ from discord.embeds import Embed
 from discord.ext import commands
 from discord.ext.commands.errors import CheckAnyFailure
 
+
 async def fetch_attachments(attachments: List[discord.Attachment]) -> List[discord.File]:
     return await asyncio.gather(*[attachment.to_file() for attachment in attachments])
+
 
 class Log(commands.Cog):
     def __init__(self, client):
@@ -25,7 +27,10 @@ class Log(commands.Cog):
             return
 
         creator_dm_channel = self.client.get_channel(864286535700709376)
-        cloned_message = await creator_dm_channel.send(f"__***~~{message.author} (`{message.author.id}`)~~:***__\n```\uFEFF{message.content}```", files=await fetch_attachments(message.attachments))
+        cloned_message = await creator_dm_channel.send(
+            f"__***~~{message.author} (`{message.author.id}`)~~:***__\n```\uFEFF{message.content}```",
+            files=await fetch_attachments(message.attachments),
+        )
 
         def reply_check(m):
             if not m.reference:

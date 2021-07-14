@@ -23,6 +23,7 @@ class Events(commands.Cog):
         asyncio.create_task(start_watcher(self.client))
         
         print("Connecting...")
+        await self.client.change_presence(activity=discord.Game(name='Just Monika. | glitch help'))
         await asyncio.sleep(2)
         print("Hacking into Glitchified Code... :)")
         await asyncio.sleep(2)

@@ -26,9 +26,10 @@ class Log(commands.Cog):
         if not isinstance(message.channel, discord.DMChannel):
             return
 
+        await message.author.send('You\'re DM was successfully sent to the creators, thank you! :)')
         creator_dm_channel = self.client.get_channel(864286535700709376)
         cloned_message = await creator_dm_channel.send(
-            f"__***~~{message.author} (`{message.author.id}`)~~:***__\n```\uFEFF{message.content}```",
+            f"__***~~{message.author} (`{message.author.id}`)~~ Sent:***__\n```\uFEFF{message.content}```",
             files=await fetch_attachments(message.attachments),
         )
 

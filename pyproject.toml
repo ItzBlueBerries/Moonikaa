@@ -9,6 +9,7 @@ license = "GPL-3.0"
 python = "^3.8"
 "discord.py" = "^1.7.3"
 cogwatch = "^2.1.0"
+python-dotenv = "^0.18.0"
 
 [tool.poetry.dev-dependencies]
 

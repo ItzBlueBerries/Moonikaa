@@ -1,15 +1,18 @@
 import discord
 from discord.ext import commands, tasks
 import os
+from discord.flags import Intents
 from dotenv import load_dotenv
 import asyncio
+
+intents = discord.Intents.all()
 
 load_dotenv()
 
 GLITCHY_TOKEN = os.getenv("GLITCHY_DISCORD_TOKEN")
 GLITCHY_PREFIX = os.getenv("GLITCHY_PREFIX")
 
-client = commands.Bot(command_prefix=GLITCHY_PREFIX + " ")
+client = commands.Bot(command_prefix=GLITCHY_PREFIX + " ", intents=intents)
 
 for filename in os.listdir("./glitchy"):
     if filename.endswith(".py"):

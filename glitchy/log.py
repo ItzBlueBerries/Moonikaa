@@ -21,12 +21,12 @@ class Log(commands.Cog):
             return
 
         creator_dm_channel = self.client.get_channel(864286535700709376)
-        cloned_message = await creator_dm_channel.send(f"__***~~{message.author} (`{message.author.id}`)~~:***__\n```{message.content}```" + "\n" + "\n".join([a.url for a in message.attachments]))
+        cloned_message = await creator_dm_channel.send(f"__***~~{message.author} (`{message.author.id}`)~~:***__\n```\uFEFF{message.content}```" + "\n" + "\n".join([a.url for a in message.attachments]))
 
         def reply_check(m):
             if not m.reference:
                 return False
-                
+
             return m.reference.message_id == cloned_message.id
 
         reply = await self.client.wait_for("message", check=reply_check)
